@@ -4,13 +4,13 @@ Installation
 Dependencies:
 *************
 
-matplotlib
-----------
+matplotlib:
+-----------
 
 Prefered way use your pre build packages. (http://matplotlib.sourceforge.net/users/installing.html). 
 
 VectorDict: 
-----------
+-----------
 
  pip install VectorDict
 
