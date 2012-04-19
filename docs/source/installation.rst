@@ -33,7 +33,3 @@ The package installs :
  * with --user it is in ~/.local/bin (unix)
  * default install will be located in /usr/local/bin (unix)
 
-
-
-
-
