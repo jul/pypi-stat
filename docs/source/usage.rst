@@ -15,7 +15,7 @@ fetched and whose name are seen in .pypi.stat.json
 TODO For crontab I should make a silent version
 
 pypi_graph_stat usage :
-=====================
+=======================
 
 .. literalinclude::
     pypi_grah_stat.rst
