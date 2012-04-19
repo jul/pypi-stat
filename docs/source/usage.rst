@@ -4,15 +4,21 @@ pypi_get_stat usage :
 .. literalinclude::
     pypi_get_stat.rst
 
-Interest ? 
+Fetching sepcific data for packages 
+***********************************
 
- * pypi stats are a daily snapshot of the cumulated information. In order to make
-time plot, we need this scripts to be called in a crontab and stored passed data. 
- * Daily data are stored in ~/.pypi.stat.json and available for future use. 
- * If no packages are given in input, the script will try all packages already 
-fetched and whose name are seen in .pypi.stat.json
+    pypi_get_stat.py -p numpy -p matplotlib
 
-TODO For crontab I should make a silent version
+will fectch, store and print the data for the packages numpy and matplotlib
+
+Fetching all data for already known package
+*******************************************
+
+If you made the previous call successfully fetching all data for numpy and matplotlib will be made by calling
+    
+    pypi_get_stat.py
+
+
 
 pypi_graph_stat usage :
 =======================
@@ -28,8 +34,6 @@ Graphing for a package with a direct output in tk
 
 
 Result : 
-
-
 
 ..  image:: image/sample1.png
 
