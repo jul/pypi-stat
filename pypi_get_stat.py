@@ -178,8 +178,8 @@ parser = argparse.ArgumentParser(description = '''
     Gathers download stats from pypi regarding the download information of the geiven package.
     Print them, and stores them in a file for further use. If no package name are provided, it will try to get all packages known from previously fetched stats.''')
 
-parser.add_argument('_package', metavar='package_name' , type = str,
-    nargs='?', help='package name to be retrieved')
+parser.add_argument('_package', metavar='package_name' , 
+    nargs='*', help='package name to be retrieved')
 
 options = parser.parse_args()
 

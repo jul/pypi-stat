@@ -26,6 +26,12 @@ Contents:
     installation
     usage
 
+
+What's new in 1.1.0
+===================
+
+* Fix : a bug in handling package name in argparse
+
 What's new in 1.0.0
 ===================
 
@@ -33,7 +39,6 @@ What's new in 1.0.0
 * Add : docs 
 * Add : autoguessing of package name from the previous stats when graphing
 * Fix : now all plots are sharing the same timeline
-
 
 
 Indices and tables

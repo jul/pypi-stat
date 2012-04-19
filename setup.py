@@ -8,7 +8,7 @@ from distutils.core import setup
 
 setup(
         name='pypi-stat',
-        version='1.0.0',
+        version='1.1.0',
         author='Julien Tayon',
         author_email='julien@tayon.net',
         url= 'https://github.com/jul/pypi-stat',
