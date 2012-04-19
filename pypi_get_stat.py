@@ -10,22 +10,25 @@ source : http://www.codekoala.com/blog/2010/pypi-download-stats/
 Added a save method
 """
 
+import argparse
 from datetime import datetime
 import locale
 import sys
 import xmlrpclib
 from os import path, environ
 from json import load
+from time import sleep
 
 locale.setlocale(locale.LC_ALL, '')
 
 class PyPIDownloadAggregator(object):
 
-    def __init__(self, package_name, include_hidden=True):
+    def __init__(self, package_name, include_hidden=True, quiet=False ):
         self.package_name = package_name
         self.include_hidden = include_hidden
         self.proxy = xmlrpclib.Server('http://pypi.python.org/pypi')
         self._downloads = {}
+        self.quiet = quiet
 
         self.first_upload = None
         self.first_upload_rel = None
@@ -65,6 +68,7 @@ Possible matches include:
 
             sys.exit(error)
 
+        
         return result
 
     @property
@@ -127,53 +131,50 @@ Possible matches include:
             with file(save,"w") as f:
                 f.write("[]")
         
-        result = load(open(save))
-        ## would be better
-        ## delete all existing entry for the existing date
-        result = filter( lambda r : r["name"] != self.package_name or 
-            r["date"] != str(date.today() ),
-            result )
-        result += [  json ]
-        dump(result,open(save,"w"))
+        with open(save) as stored:
+            result = filter( 
+                lambda r : r["name"] != self.package_name or 
+                    r["date"] != str(date.today()),
+                load(stored)
+            )
+            result += [  json ]
+            dump(result,open(save,"w"))
 
 
     def stats(self):
         """Prints a nicely formatted list of statistics about the package"""
 
         self.downloads # explicitly call, so we have first/last upload data
-        fmt = locale.nl_langinfo(locale.D_T_FMT)
-        sep = lambda s: locale.format('%d', s, 3)
-        val = lambda dt: dt and dt.strftime(fmt) or '--'
 
         params = (
             self.package_name,
-            val(self.first_upload),
+            self.first_upload,
             self.first_upload_rel,
-            val(self.last_upload),
+            self.last_upload,
             self.last_upload_rel,
-            sep(len(self.releases)),
-            sep(self.max()),
-            sep(self.min()),
-            sep(self.average()),
-            sep(self.total()),
+            len(self.releases),
+            self.max(),
+            self.min(),
+            self.average(),
+            self.total(),
         )
 
  
+        if not self.quiet:
+            print """PyPI Package statistics for: %s
 
-        print """PyPI Package statistics for: %s
-
-    First Upload: %40s (%s)
-    Last Upload:  %40s (%s)
+    First Upload: %40s (%r)
+    Last Upload:  %40s (%r)
     Number of releases: %34s
     Most downloads:    %35s
     Fewest downloads:  %35s
     Average downloads: %35s
     Total downloads:   %35s
 """ % params
-    ### gruiky to override coupling
         self.save()
+
+
 """sur recommandation de grenoya :)"""
-import argparse
 parser = argparse.ArgumentParser(description = '''
     Gathers download stats from pypi regarding the download information of the geiven package.
     Print them, and stores them in a file for further use. If no package name are provided, it will try to get all packages known from previously fetched stats.''')
@@ -184,27 +185,27 @@ parser.add_argument('_package', metavar='package_name' ,
 options = parser.parse_args()
 
 guessed = set()
-saved=path.join(environ["HOME"], ".pipy.stat.json"  )
-try:
-    with open(saved  ) as f:
-        guessed =  reduce( 
-            set.union, 
-                map( 
-                    lambda x : set( [  x['name'] ]  ), load(f)
+if not options._package:
+    saved=path.join(environ["HOME"], ".pipy.stat.json"  )
+    try:
+        with open(saved  ) as f:
+            guessed =  reduce( 
+                set.union, 
+                    map( 
+                        lambda x : set( [  x['name'] ]  ), load(f)
+                    )
                 )
-            )
-        print  "found %s" % ",".join(guessed)
-except:
-    print "could not load previously stored stats to guess packages"
+            print  "found %s" % ",".join(guessed)
+    except:
+        print "could not load previously stored stats to guess packages"
 
 for pkg in options._package or guessed :
+    locale.setlocale(locale.LC_ALL, '')
     from time import sleep
     try:
-        sleep(1)
-        gni = PyPIDownloadAggregator(str(pkg))
-        gni.stats()
-    except:
-        print "fetching stats for *%s* failed" % pkg 
+        PyPIDownloadAggregator(pkg.strip()).stats()
+    except Exception as e:
+        print "fetching stats for *%s* failedi (%r)" % ( pkg, e) 
 
 
    

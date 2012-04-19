@@ -5,6 +5,11 @@ Wishlist
  * removing release annotation optionnaly in plots ;
  * try to tell date auto formating to stop using hours when data are less than 3 days old.  :'(
 
+What's new in 1.1.2
+===================
+
+* Fix : gettext users should be burnt random bugs are annoying
+
 What's new in 1.1.0
 ===================
 
