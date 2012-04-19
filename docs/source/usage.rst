@@ -2,7 +2,7 @@ pypi_get_stat usage :
 =====================
 
 .. literalinclude::
-    pypi_get_stat.rst
+    inc/pypi_get_stat.rst
 
 Fetching sepcific data for packages 
 ***********************************
@@ -24,7 +24,7 @@ pypi_graph_stat usage :
 =======================
 
 .. literalinclude::
-    pypi_grah_stat.rst
+    inc/pypi_grah_stat.rst
 
 Graphing for a package with a direct output in tk
 *************************************************
