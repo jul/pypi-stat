@@ -100,7 +100,6 @@ min_date, max_date = None,None
 
 ax1 = None
 ax = None
-plt.subplots_adjust(hspace = 0.2, top = 0.9, bottom=0.1)    
 for cursor, (name, data) in enumerate(res.iteritems()):
     if cursor != 0:
         ax = fig.add_subplot( 100 *   total_plot + 10 +  cursor+1, sharex=ax1)
@@ -144,6 +143,7 @@ for cursor, (name, data) in enumerate(res.iteritems()):
     # Sh*t ticker with formater only on one graph :(
 
 fig.autofmt_xdate()
+plt.subplots_adjust( top = 0.95, bottom=0.12, left=0.12,right=.95)    
 plt.draw()
 
 if options._dest:

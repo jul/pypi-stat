@@ -3,6 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
+References : 
+============
+
+* source : https://github.com/jul/pypi-stat/
+* online documentation : http://pypi-stat.readthedocs.org/
+* ticketing : https://github.com/jul/pypi-stat/issues
+
+Example
+=======
+
+..  image:: image/sample1.png 
+
 Welcome to pypi-stat's documentation!
 =====================================
 
