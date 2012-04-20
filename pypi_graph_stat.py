@@ -101,9 +101,10 @@ import matplotlib.pyplot as plt
 from matplotlib.ticker import FuncFormatter
 K = 1000
 YMAX_BUG=80*K
+YSIZE_PER_PLOT_INCH = 4
 
 total_plot = len(res)
-fig = plt.figure(figsize = ( 8 , total_plot * 3  ))
+fig = plt.figure(figsize = ( 8 , total_plot * YSIZE_PER_PLOT_INCH  ))
 min_date, max_date = None,None
 
 ax1 = None
@@ -160,7 +161,7 @@ for cursor, (name, data) in enumerate(res.iteritems()):
 
 fig.autofmt_xdate()
 plt.autoscale(axis = 'y')
-plt.subplots_adjust( top = 0.95, bottom=0.12, left=0.12,right=.95)
+plt.subplots_adjust( top = 0.95, bottom=0.2, left=0.1,right=.9)
 plt.draw()
 
 if options._dest:
