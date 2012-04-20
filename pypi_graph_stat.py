@@ -4,11 +4,13 @@
 from vector_dict.VectorDict import VectorDict as vd,convert_tree
 from vector_dict.SparseMatrix import SparseMatrix
 
+
 from os import path, environ
 from json import load
 from datetime import datetime as dt
 from matplotlib import dates
 from optparse import OptionParser
+from numpy import array
 
 ##################### WORKFLOW ######################
 ###### parsing
@@ -73,7 +75,7 @@ res = reduce( vd.__add__,
                 )
             }) + convert_tree(
                 {  x['name'] :
-                    dict( ( key, [  x[key] ] ) for key in _key)
+                    dict( ( key, [  int(x[key]) ] ) for key in _key)
             }) + convert_tree( {
                 x["name"] : {
                     'release' :  { x["last_release"] :
@@ -96,7 +98,9 @@ import matplotlib
 matplotlib.use(options._dest and "Agg" or "TkAgg")
 
 import matplotlib.pyplot as plt
-
+from matplotlib.ticker import FuncFormatter
+K = 1000
+YMAX_BUG=80*K
 
 total_plot = len(res)
 fig = plt.figure(figsize = ( 8 , total_plot * 3  ))
@@ -106,7 +110,7 @@ ax1 = None
 ax = None
 
 for cursor, (name, data) in enumerate(res.iteritems()):
-    if cursor != 0:
+    if cursor != 0 :
         ax = fig.add_subplot( (100 * total_plot) + (10) + (cursor + 1), sharex=ax1)
     else:
         ax = fig.add_subplot(total_plot * 100 + 11 )
@@ -121,9 +125,18 @@ for cursor, (name, data) in enumerate(res.iteritems()):
             max( max(data["date"]), max_date) or \
             max(data["date"])
 
-
+    ymax=0
     for key in _key:
-        _plot += [ ax.plot_date( data["date"], data[key],  '.-' , label = key) ]
+        ymax = max(max(data[key]), ymax)
+        _plot += [ ax.plot_date( array(data["date"]), array(data[key], int),  '.-' , label = key) ]
+    if ymax > YMAX_BUG:
+        ax.yaxis.set_major_formatter(FuncFormatter(
+            lambda x, pos: ('%.1f')%(x*1e-3))
+        )
+        ax.set_ylabel('K (1E3)')
+
+        
+        
 
     ax.legend(  loc=2,)
 
@@ -142,11 +155,11 @@ for cursor, (name, data) in enumerate(res.iteritems()):
         )
 
     plt.xlim([ min_date, max_date])
-    plt.autoscale(axis = 'y')
 
     ax.set_title( "Statistic for %s" % (name) )
 
 fig.autofmt_xdate()
+plt.autoscale(axis = 'y')
 plt.subplots_adjust( top = 0.95, bottom=0.12, left=0.12,right=.95)
 plt.draw()
 
