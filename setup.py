@@ -8,9 +8,10 @@ from distutils.core import setup
 
 setup(
         name='pypi-stat',
-        version='1.1.2',
+        version='1.2.0',
         author='Julien Tayon',
         author_email='julien@tayon.net',
+        bugtrack_url='https://github.com/jul/pypi-stat/issues',
         url= 'https://github.com/jul/pypi-stat',
         packages=[],
         scripts = [ 'pypi_get_stat.py', 'pypi_graph_stat.py' ],

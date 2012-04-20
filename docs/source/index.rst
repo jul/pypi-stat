@@ -47,6 +47,19 @@ Example
 
 ..  image:: image/sample1.png 
 
+QuickStart
+==========
+
+Install following :ref:`installation`
+
+get stats for a package (here we want download stats for numpy). 
+
+ ``pypi_get_stat.py numpy``
+
+graph all known packages in the stored stats.
+ 
+ ``pypi_graph_stat.py``
+
 Using pypi-stat
 ===============
 
