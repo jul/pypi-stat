@@ -6,8 +6,9 @@ mixed query on stat file
 """
 from os import environ, path
 from json import load
-from vector_dict.VectorDict import VectorDict as krut
-from vector_dict.VectorDict import convert_tree as kruter
+# not yet usefull
+#from vector_dict.VectorDict import VectorDict as krut
+#from vector_dict.VectorDict import convert_tree as kruter
 import datetime as dt
 import time
 
@@ -41,8 +42,11 @@ def date_to_js_timestamp(_date_str):
                 ).timetuple()
             )*1000
     )
-    
+
+###misc query
+
 all_package = lambda : generate(lambda x : set( [  x['name'] ]  ),set.union)
+
 data_for = lambda package,key : generate(
     lambda x : [ ( 
             date_to_js_timestamp( x['date']),
@@ -51,10 +55,6 @@ data_for = lambda package,key : generate(
     list.__add__,
     lambda x : x['name'] ==  package 
 )
-#data_for = lambda package : generate( 
-#    lambda x : 
-#print all_package()
-#print stat_list()
 
 
    
