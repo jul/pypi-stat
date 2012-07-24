@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-from vector_dict.VectorDict import VectorDict as vd,convert_tree
-from vector_dict.SparseMatrix import SparseMatrix
+#from vector_dict.VectorDict import VectorDict as vd,convert_tree
+from archery.bow import Hankyu as _dict
+from archery.barrack import bowyer as convert_tree
 
 
 from os import path, environ
@@ -46,7 +47,6 @@ parser.add_option("-p",'--package', dest="_package",
     help='packages for wich to graph',
     action='append'
     )
-
 (options, args) = parser.parse_args()
 
 #################### QUERYING DATA ############################################
@@ -66,17 +66,17 @@ _key = options.key  or _key
 save=path.join(environ["HOME"], ".pipy.stat.json" )
 result = load(open(save))
 
-res = reduce( vd.__add__,
+res = reduce( _dict.__iadd__,
     map(
-        lambda x : convert_tree(
+        lambda x : convert_tree(_dict,
             {
                 x["name"] : dict(
                     date =[ dates.date2num(dt.strptime(x['date'],"%Y-%m-%d")) ],
                 )
-            }) + convert_tree(
+            }) + convert_tree(_dict,
                 {  x['name'] :
                     dict( ( key, [  int(x[key]) ] ) for key in _key)
-            }) + convert_tree( {
+            }) + convert_tree(_dict, {
                 x["name"] : {
                     'release' :  { x["last_release"] :
                     [ x['last_upload'] ] }
@@ -93,7 +93,7 @@ res = reduce( vd.__add__,
 
 options._package = res.keys()
 
-################## PLOTTING ############################################################
+################ PLOTTING #####################################################
 import matplotlib
 matplotlib.use(options._dest and "Agg" or "TkAgg")
 
@@ -104,17 +104,16 @@ YMAX_BUG=80*K
 YSIZE_PER_PLOT_INCH = 4
 
 total_plot = len(res)
-fig = plt.figure(figsize = ( 8 , total_plot * YSIZE_PER_PLOT_INCH  ))
+fig = plt.figure(figsize = ( 8 , YSIZE_PER_PLOT_INCH *total_plot ))
 min_date, max_date = None,None
-
 ax1 = None
 ax = None
 
 for cursor, (name, data) in enumerate(res.iteritems()):
     if cursor != 0 :
-        ax = fig.add_subplot( (100 * total_plot) + (10) + (cursor + 1), sharex=ax1)
+        ax = fig.add_subplot( total_plot , 1, cursor +1, sharex=ax1)
     else:
-        ax = fig.add_subplot(total_plot * 100 + 11 )
+        ax = fig.add_subplot(total_plot , 1,1 )
         ax1= ax
 
     _plot = []
@@ -161,7 +160,8 @@ for cursor, (name, data) in enumerate(res.iteritems()):
 
 fig.autofmt_xdate()
 plt.autoscale(axis = 'y')
-plt.subplots_adjust( top = 0.95, bottom=0.2, left=0.1,right=.9)
+plt.subplots_adjust( top =.9 , bottom=0.2, left=0.15,right=.9)
+
 plt.draw()
 
 if options._dest:
