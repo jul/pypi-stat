@@ -28,12 +28,14 @@ usage::
         -h, --help    show this help message and exit
         -q, --quiet   less verbose output
 
+
 Graphing stats
 ==============
 usage::
-    Usage: pypi_graph_stat.py [options]
+   
+   usage: pypi_graph_stat.py [options]
 
-    Options:
+    options:
       -h, --help            show this help message and exit
       -k KEY                keys to plot in stored stats amongst av_dl, total_dl,
                             min_dl','max_dl'
