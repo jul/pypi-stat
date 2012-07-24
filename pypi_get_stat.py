@@ -18,6 +18,7 @@ import xmlrpclib
 from os import path, environ
 from json import load
 from time import sleep
+import shutil
 
 locale.setlocale(locale.LC_ALL, '')
 
@@ -138,7 +139,18 @@ Possible matches include:
                 load(stored)
             )
             result += [  json ]
-            dump(result,open(save,"w"))
+        dump(result,open("%s.bak" % save ,"w"))
+        try:
+            ## move are atomic operations less dangerous than previous
+            shutil.move(save, "%s.old" % save)
+            shutil.move("%s.bak" % save,save)
+        except Exception as e:
+            print("something weired occured")
+            print("""
+                check : %s.bak (new stats), %s.old (backup of old stats) %s
+                """% (save)* 3)
+            raise( e )
+
 
 
     def stats(self):
@@ -176,11 +188,26 @@ Possible matches include:
 
 """sur recommandation de grenoya :)"""
 parser = argparse.ArgumentParser(description = '''
-    Gathers download stats from pypi regarding the download information of the geiven package.
-    Print them, and stores them in a file for further use. If no package name are provided, it will try to get all packages known from previously fetched stats.''')
+    Gathers download stats from pypi regarding the download information 
+    of the geiven package.  Print them, and stores them in a file for further
+    use. If no package name are provided, it will try to get all packages
+    known from previously fetched stats.
 
+    -q will print less output (only warnings and errors)
+    ''')
+
+
+
+    
+
+parser.add_argument("-q", "--quiet",
+    action="store_true",
+    help="less verbose output",
+    default=False,
+    )
 parser.add_argument('_package', metavar='package_name' , 
     nargs='*', help='package name to be retrieved')
+
 
 options = parser.parse_args()
 
@@ -203,7 +230,7 @@ for pkg in options._package or guessed :
     locale.setlocale(locale.LC_ALL, '')
     from time import sleep
     try:
-        PyPIDownloadAggregator(pkg.strip()).stats()
+        PyPIDownloadAggregator(pkg.strip(),True, options.quiet).stats()
     except Exception as e:
         print "fetching stats for *%s* failedi (%r)" % ( pkg, e) 
 
