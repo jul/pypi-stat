@@ -3,6 +3,7 @@
 
 from distutils.command.build_py import build_py as _build_py
 from distutils.core import setup
+import sys
 
 
 #test()
@@ -37,9 +38,9 @@ def test():
         if to_backup:
             unlink(save)
             shutil.move("%s.original" %save, save)
-        
 
-test()
+if "install" in sys.argv or "bdist_egg" in sys.argv:
+    test()
 setup(
         name='pypi-stat',
         version='1.2.2',

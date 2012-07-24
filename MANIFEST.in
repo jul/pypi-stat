@@ -1,2 +1,2 @@
-include ./pypi.*py
+include ./pypi_.*py
 include README.rst
