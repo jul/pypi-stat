@@ -6,52 +6,61 @@ from distutils.core import setup
 import sys
 
 
-#test()
-def test():
+def func_test():
     from os import path, environ,unlink
     import shutil
     import subprocess
     from json import load
     to_backup=False
+    abort=True
     save= path.join(environ["HOME"] , ".pipy.stat.json")
     try:
         if path.exists(save):
-            print("backuping previous saved stat in %s" % save)
+            print("backuping previous saved stat in %s to %s.original" % (
+                save,save) )
             to_backup=True
             shutil.move(save, "%s.original" % save)
 
-        test_dl=subprocess.call([ "./pypi_get_stat.py",'-q', 'archery' ])
-        print( test_dl )
-
+        test_dl=subprocess.call([ "python","./pypi_get_stat.py",'-q', 'archery' ])
         with open(path.join(environ["HOME"] , ".pipy.stat.json")) as  f:
             res=load(f)
             if any(map(lambda d:d.get("name", "") == 'archery', res)):
-                print( "success")
+                abort=False
             else:
-                raise Exception(
+                print(
                 "This package does not work as is, please open a ticket %s" % e)
+                print("Error")
     except Exception as e:
-        raise Exception(
+        abort=True
+        print(
         "This package does not work as is, please open a ticket %s" % e)
         print("Error")
     finally:
         if to_backup:
             unlink(save)
             shutil.move("%s.original" %save, save)
+            print("restoring original stats in %s.original to %s" % (
+                save,save)  )
+    return not abort
 
-if "install" in sys.argv or "bdist_egg" in sys.argv:
-    test()
+if "sdist" in sys.argv or "install" in sys.argv or "bdist_egg" in sys.argv:
+    if func_test():
+        print( "###test are successful")
+    else:
+        print("arg")
+        raise Exception("Test did not passed")
+
 setup(
         name='pypi-stat',
         version='1.2.2',
         author='Julien Tayon',
         author_email='julien@tayon.net',
-        bugtrack_url='https://github.com/jul/pypi-stat/issues',
         url= 'https://github.com/jul/pypi-stat',
         packages=[],
         scripts = [ 'pypi_get_stat.py', 'pypi_graph_stat.py' ],
         license='LICENSE.txt',
         description='solution for getting packages stat, and graphing them',
+        long_description=file("README.rst").read(),
         requires=['numpy', 'matplotlib','archery' ],
         classifiers=[
           'Development Status :: 5 - Production/Stable',
