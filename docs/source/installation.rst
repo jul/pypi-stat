@@ -11,10 +11,10 @@ matplotlib:
 
 Prefered way use your pre build packages. (http://matplotlib.sourceforge.net/users/installing.html). 
 
-VectorDict: 
------------
+archery
+-------
 
- pip install VectorDict
+ pip install archery
 
 pypi-stat:
 ----------

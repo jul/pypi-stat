@@ -1,9 +1,15 @@
 Wishlist
 ========
 
- * Silent pypi_get_data.py (except for errors) for crontab use ;
  * removing release annotation optionnaly in plots ;
  * try to tell date auto formating to stop using hours when data are less than 3 days old.  :'(
+
+What's new in 1.2.2
+===================
+
+* fixes a potentially annoying problem of data loss (#3);
+* fixes a potentially annoying problem of max limits in subplots (#4)
+* adds a quiet option (-q) for pypi_get_stat.py
 
 What's new in 1.2.1
 ===================
