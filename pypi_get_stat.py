@@ -173,7 +173,7 @@ Possible matches include:
 
  
         if not self.quiet:
-            print """PyPI Package statistics for: %s
+            print( """PyPI Package statistics for: %s
 
     First Upload: %40s (%r)
     Last Upload:  %40s (%r)
@@ -182,7 +182,7 @@ Possible matches include:
     Fewest downloads:  %35s
     Average downloads: %35s
     Total downloads:   %35s
-""" % params
+""" % params)
         self.save()
 
 
@@ -222,9 +222,9 @@ if not options._package:
                         lambda x : set( [  x['name'] ]  ), load(f)
                     )
                 )
-            print  "found %s" % ",".join(guessed)
+            print(  "found %s" % ",".join(guessed) )
     except:
-        print "could not load previously stored stats to guess packages"
+        print( "could not load previously stored stats to guess packages" )
 
 for pkg in options._package or guessed :
     locale.setlocale(locale.LC_ALL, '')
@@ -232,7 +232,7 @@ for pkg in options._package or guessed :
     try:
         PyPIDownloadAggregator(pkg.strip(),True, options.quiet).stats()
     except Exception as e:
-        print "fetching stats for *%s* failedi (%r)" % ( pkg, e) 
+        print( "fetching stats for *%s* failed (%r)" % ( pkg, e) )
 
 
    

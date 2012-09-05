@@ -1,2 +1,4 @@
 include ./pypi_.*py
+include ./pypi_.*py
 include README.rst
+include LICENSE.txt

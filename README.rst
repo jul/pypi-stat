@@ -47,9 +47,13 @@ usage::
       -p _PACKAGE, --package=_PACKAGE
                             packages for wich to graph
 
+You'll need matplotlib and numpy to plot the graphs. Read the doc (installation 
+section) for more informations.
+
 Changelog
 =========
 
+* fighting debian and my typos
 * fixing a dependency. I really like the install fails before test mechanisms
 but if nobody opens a ticket I won't be able to know that it fails. 
 

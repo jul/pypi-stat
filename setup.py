@@ -18,8 +18,8 @@ def func_test():
         if path.exists(save):
             print("backuping previous saved stat in %s to %s.original" % (
                 save,save) )
-            to_backup=True
             shutil.move(save, "%s.original" % save)
+            to_backup=True
 
         test_dl=subprocess.call([ "python","./pypi_get_stat.py",'-q', 'archery' ])
         with open(path.join(environ["HOME"] , ".pipy.stat.json")) as  f:
@@ -52,7 +52,7 @@ if "sdist" in sys.argv or "install" in sys.argv or "bdist_egg" in sys.argv:
 
 setup(
         name='pypi-stat',
-        version='1.2.3f',
+        version='1.2.5',
         author='Julien Tayon',
         author_email='julien@tayon.net',
         url= 'https://github.com/jul/pypi-stat',
@@ -61,7 +61,7 @@ setup(
         license=open('LICENSE.txt').read(),
         description='solution for getting packages stat, and graphing them',
         long_description=open("README.rst").read(),
-        requires=['numpy', 'matplotlib','archery', 'argparse' ],
+        install_requires=[ 'archery', 'argparse' ],
         classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Intended Audience :: Developers',
