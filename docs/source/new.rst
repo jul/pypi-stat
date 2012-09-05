@@ -1,8 +1,8 @@
-Wishlist
-========
 
- * removing release annotation optionnaly in plots ;
- * try to tell date auto formating to stop using hours when data are less than 3 days old.  :'(
+1.2.3
+=====
+
+* fixing missing argparse dependancy. I really would need a virginal VM to test my packages :/ 
 
 What's new in 1.2.2
 ===================

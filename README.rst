@@ -2,13 +2,11 @@ All the docs are on
 http://pypi-stat.readthedocs.org
 and when rtds don't work fall back here
 http://packages.python.org/pypi-stat/
+Source:
+http://github.com/jul/pypi-stat
+Ticket
+http://github.com/jul/pypi-stat/issues
 
-Changelog:
-==========
-
-* fixes a potentially annoying problem of data loss (#3);
-* fixes a potentially annoying problem of max limits in subplots (#4)
-* adds a quiet option (-q) for pypi_get_stat.py
 
 Getting stats
 =============
@@ -49,6 +47,10 @@ usage::
       -p _PACKAGE, --package=_PACKAGE
                             packages for wich to graph
 
+Changelog
+=========
 
+* fixing a dependency. I really like the install fails before test mechanisms
+but if nobody opens a ticket I won't be able to know that it fails. 
 
 
