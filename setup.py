@@ -52,15 +52,15 @@ if "sdist" in sys.argv or "install" in sys.argv or "bdist_egg" in sys.argv:
 
 setup(
         name='pypi-stat',
-        version='1.2.3',
+        version='1.2.3f',
         author='Julien Tayon',
         author_email='julien@tayon.net',
         url= 'https://github.com/jul/pypi-stat',
         packages=[],
         scripts = [ 'pypi_get_stat.py', 'pypi_graph_stat.py' ],
-        license=file('LICENSE.txt').read(),
+        license=open('LICENSE.txt').read(),
         description='solution for getting packages stat, and graphing them',
-        long_description=file("README.rst").read(),
+        long_description=open("README.rst").read(),
         requires=['numpy', 'matplotlib','archery', 'argparse' ],
         classifiers=[
           'Development Status :: 5 - Production/Stable',
