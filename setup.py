@@ -1,4 +1,4 @@
-#!/usr/bin/env pyrhon
+#!/usr/bin/env python
 # -*- coding: "utf-8" -*-
 
 from distutils.command.build_py import build_py as _build_py
