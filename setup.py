@@ -1,8 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: "utf-8" -*-
 
-from distutils.command.build_py import build_py as _build_py
-from distutils.core import setup
+#from distutils.command.build_py import build_py as _build_py
+from setuptools import setup
+#from distutils.core import setup
+#from distutil2 import setup
 import sys
 
 
@@ -58,10 +60,13 @@ setup(
         url= 'https://github.com/jul/pypi-stat',
         packages=[],
         scripts = [ 'pypi_get_stat.py', 'pypi_graph_stat.py' ],
-        license=open('LICENSE.txt').read(),
+        license="PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2",
         description='solution for getting packages stat, and graphing them',
+        install_requires=[
+                "matplotlib",
+                "numpy",
+        ],
         long_description=open("README.rst").read(),
-        install_requires=[ 'archery', 'argparse' ],
         classifiers=[
           'Development Status :: 5 - Production/Stable',
           'Intended Audience :: Developers',
@@ -69,6 +74,7 @@ setup(
           'Programming Language :: Python :: 2.6',
           'Operating System :: OS Independent',
           'Programming Language :: Python :: 2.7',
+          'Programming Language :: Python :: 3.2',
           'Programming Language :: Python',
           ],
 )
