@@ -63,7 +63,7 @@ setup(
         license="PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2",
         description='solution for getting packages stat, and graphing them',
         install_requires=[
-                "numpy",
+                "numpy => 1.5.0",
                 "matplotlib",
                 "argparse",
         ],
@@ -75,7 +75,6 @@ setup(
           'Programming Language :: Python :: 2.6',
           'Operating System :: OS Independent',
           'Programming Language :: Python :: 2.7',
-          'Programming Language :: Python :: 3.2',
           'Programming Language :: Python',
           ],
 )
