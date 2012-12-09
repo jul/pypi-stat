@@ -63,9 +63,9 @@ setup(
         license="PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2",
         description='solution for getting packages stat, and graphing them',
         install_requires=[
-                "matplotlib",
                 "numpy",
-                "argparse"
+                "matplotlib",
+                "argparse",
         ],
         long_description=open("README.rst").read(),
         classifiers=[
