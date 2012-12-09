@@ -65,6 +65,7 @@ setup(
         install_requires=[
                 "matplotlib",
                 "numpy",
+                "argparse"
         ],
         long_description=open("README.rst").read(),
         classifiers=[
