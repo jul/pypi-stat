@@ -5,8 +5,8 @@ python:
     - "3.2"
     - "3.3"
 install: 
-  - "pip install . --use-mirrors"
+  - pip install . --use-mirrors
 script:
   ### test are done in the install part ! 
-  - "echo 1"
+  - echo 1
 
