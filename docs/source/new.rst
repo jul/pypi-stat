@@ -1,6 +1,5 @@
-
-1.2.3
-=====
+What's new in 1.2.3
+===================
 
 * fixing missing argparse dependancy. I really would need a virginal VM to test my packages :/ 
 
