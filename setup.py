@@ -54,7 +54,7 @@ if "sdist" in sys.argv or "install" in sys.argv or "bdist_egg" in sys.argv:
 
 setup(
         name='pypi-stat',
-        version='1.3.1',
+        version='1.3.2',
         author='Julien Tayon',
         author_email='julien@tayon.net',
         url= 'https://github.com/jul/pypi-stat',
