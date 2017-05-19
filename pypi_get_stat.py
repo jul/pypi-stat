@@ -27,7 +27,7 @@ class PyPIDownloadAggregator(object):
     def __init__(self, package_name, include_hidden=True, quiet=False ):
         self.package_name = package_name
         self.include_hidden = include_hidden
-        self.proxy = xmlrpclib.Server('http://pypi.python.org/pypi')
+        self.proxy = xmlrpclib.Server('https://pypi.python.org/pypi')
         self._downloads = {}
         self.quiet = quiet
 

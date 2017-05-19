@@ -29,6 +29,7 @@ usage::
 
 Graphing stats
 ==============
+
 usage::
    
    usage: pypi_graph_stat.py [options]
@@ -53,7 +54,11 @@ section) for more informations.
 Changelog
 =========
 
-* fighting debian and my typos
-* fixing a dependency. I really like the install fails before test mechanisms
-but if nobody opens a ticket I won't be able to know that it fails. 
+- fighting debian and my typos
+- fixing a dependency. I really like the install fails before test mechanisms
+  but if nobody opens a ticket I won't be able to know that it fails. 
 
+1.3.0
+-----
+
+- using https to make pypi stat great again and fonctionnal :)
