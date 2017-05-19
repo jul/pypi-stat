@@ -54,7 +54,7 @@ if "sdist" in sys.argv or "install" in sys.argv or "bdist_egg" in sys.argv:
 
 setup(
         name='pypi-stat',
-        version='1.3.0',
+        version='1.3.1',
         author='Julien Tayon',
         author_email='julien@tayon.net',
         url= 'https://github.com/jul/pypi-stat',
@@ -63,8 +63,7 @@ setup(
         license="PYTHON SOFTWARE FOUNDATION LICENSE VERSION 2",
         description='solution for getting packages stat, and graphing them',
         install_requires=[
-                "numpy>=1.5.0",
-                "matplotlib",
+                "archery",
                 "argparse",
         ],
         long_description=open("README.rst").read(),

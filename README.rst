@@ -62,3 +62,9 @@ Changelog
 -----
 
 - using https to make pypi stat great again and fonctionnal :)
+
+
+1.3.1
+-----
+
+- totally forgot the requirement on archery since day 1
