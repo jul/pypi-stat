@@ -1,1 +1,3 @@
 archery
+matplotlib
+numpy>1.5

@@ -68,3 +68,9 @@ Changelog
 -----
 
 - totally forgot the requirement on archery since day 1
+
+1.3.2
+-----
+
+- you learn everyday :) my install_require was overkill
+
